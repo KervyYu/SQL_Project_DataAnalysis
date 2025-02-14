@@ -1,6 +1,6 @@
 /*
 Question:
-1. What are the top paying Data Analysis Jobs?
+1. What are the top paying Data Analyst Jobs?
    a.Top paying for Remote? Non-Remote? 
 - Find the top 10 mhighest paying data analysis jobs for both remote and non-remote
 - Create (2) queries: 1 for remote jobs only,and 1 for non-remote
