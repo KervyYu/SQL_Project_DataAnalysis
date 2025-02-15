@@ -14,7 +14,6 @@ WITH top_salary_remote AS (
         j.job_id,
         j.job_title AS job_name,
         c.name AS company,
-        j.job_location,
         j.job_work_from_home AS job_remote,
         j.job_schedule_type,
         j.salary_year_avg AS salary
@@ -22,13 +21,13 @@ WITH top_salary_remote AS (
         job_postings_fact AS j
     INNER JOIN company_dim AS c ON j.company_id = c.company_id
     WHERE
-        j.job_title IN ('Data Analyst') AND 
+        j.job_title_short IN ('Data Analyst') AND 
         j.job_schedule_type = 'Full-time' AND 
         salary_year_avg IS NOT NULL AND
         j.job_work_from_home = TRUE
     ORDER BY
         salary DESC
-    LIMIT 20
+    LIMIT 10
 )
 
 SELECT
@@ -39,8 +38,8 @@ FROM
 INNER JOIN skills_job_dim AS sj ON top_salary_remote.job_id = sj.job_id
 INNER JOIN skills_dim AS s ON sj.skill_id = s.skill_id
 ORDER BY
-   salary DESC
-LIMIT 20
+    salary DESC
+
 
 
 
@@ -58,7 +57,7 @@ WITH top_salary_remote AS (
     FROM
         job_postings_fact AS j
     WHERE
-        j.job_title IN ('Data Analyst') AND 
+        j.job_title_short IN ('Data Analyst') AND 
         j.job_schedule_type = 'Full-time' AND 
         salary_year_avg IS NOT NULL AND
         j.job_work_from_home = TRUE
@@ -93,7 +92,7 @@ WITH top_salary_remote AS (
     FROM
         job_postings_fact AS j
     WHERE
-        j.job_title IN ('Data Analyst') AND 
+        j.job_title_short IN ('Data Analyst') AND 
         j.job_schedule_type = 'Full-time' AND 
         salary_year_avg IS NOT NULL AND
         j.job_work_from_home = FALSE
