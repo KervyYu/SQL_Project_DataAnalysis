@@ -8,4 +8,18 @@ Questions:
 4. What are the top skills based on salary for data analyst?
 5. What are the most optimal skills to learn for both high salary and most used?
 
-Insight Question: Is Remote data analysis job better than non-remote?
+Insight Question: Is remote data analysis job suitable for me than non-remote?
+
+
+
+# Introduction
+
+# Background
+
+# Tools I Used
+
+# Analysis
+
+# Learnings
+
+# Conclusion
