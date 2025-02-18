@@ -16,7 +16,7 @@ Insight Question: Is remote data analysis job suitable for me than non-remote?
 Hey there! This is my first SQL project that is entirely based on the SQL course offered by no other than "Luke Barousse" and "Kelly Adams". Dive into the job market focused on Data Analyst roles! This project is best for people who want to explore different career opportunities or for people who are aiming to identify high-potential business startups. This helped me focus on what I should prioritize in order to be a successful Data Analyst. 
 
 SQL course of Luke Barousse: [SQL for Data Analysis](https://www.lukebarousse.com/sql)
-
+SQL Queries: [SQL Project Folder](/project_sql/)
 
 
 # Background
