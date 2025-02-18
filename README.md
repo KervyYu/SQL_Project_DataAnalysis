@@ -17,7 +17,7 @@ The project will primarily focus on commonly used skills, in-demand skills, top-
 There are four(4) tables in this dataset: **job_postings_fact table**, **company_dim table**, **skills_job_dim table**, and **skills_dim table**
 
 ## ERD for this dataset
-![Alt Text](assets\erd.png)
+![Alt Text](assets/erd.png)
 **This is the Entity Relationship diagram with this dataset. One(1) table for the job postings, two(2) tables that has the information for the skills required for that job, and one(1) table for the company associated with that job.**
 
 Relationships:
