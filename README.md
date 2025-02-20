@@ -42,8 +42,8 @@ These are the tools I personally used to tackle this project:
 
    - SQL
    - PostgreSQL
-   - Visual Studio Code
    - Power BI
+   - Visual Studio Code
    - Git and Github
 
 # Analysis
