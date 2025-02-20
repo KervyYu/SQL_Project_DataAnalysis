@@ -1,19 +1,19 @@
 /*
 Question:
 2. What are the top skills required for these top paying remote data analyst job??
-- Find the top 10 mhighest paying data analysis jobs for remote 
+- Find the top 10 highest paying data analysis jobs for remote 
 - Add the specific skill required  
 - most common skills used for remote and non remote for top paying jobs
 -Purpose: To be able to know which skill is needed especially for remote analyst jobs and non remote
 */
 
--- getting the highest salary remote job with skills
-
+-- displaying the skills for the highest salary remote jobs (Based on Q1)
 WITH top_salary_remote AS (
-    SELECT
+   SELECT
         j.job_id,
         j.job_title AS job_name,
         c.name AS company,
+        j.job_location,
         j.job_work_from_home AS job_remote,
         j.job_schedule_type,
         j.salary_year_avg AS salary
@@ -63,7 +63,7 @@ WITH top_salary_remote AS (
         j.job_work_from_home = TRUE
     ORDER BY
         salary DESC
-    LIMIT 30
+    LIMIT 10
 )
 
 SELECT
@@ -77,11 +77,12 @@ GROUP BY
     s.skills
 ORDER BY
     total_skills DESC
+LIMIT 10
 
 
 
 --knowing the most common skill used for non-remote 
-WITH top_salary_remote AS (
+WITH top_salary_nonremote AS (
     SELECT
         j.job_id,
         j.job_title AS job_name,
@@ -98,19 +99,20 @@ WITH top_salary_remote AS (
         j.job_work_from_home = FALSE
     ORDER BY
         salary DESC
-    LIMIT 30
+    LIMIT 10
 )
 
 
 SELECT
     s.skills AS skills,
-    COUNT(top_salary_remote.job_id) AS total_skills
+    COUNT(top_salary_nonremote.job_id) AS total_skills
 FROM
     skills_dim AS s
 INNER JOIN skills_job_dim AS sj ON s.skill_id = sj.skill_id
-INNER JOIN top_salary_remote ON sj.job_id = top_salary_remote.job_id
+INNER JOIN top_salary_nonremote ON sj.job_id = top_salary_nonremote.job_id
 GROUP BY
     s.skills
 ORDER BY
     total_skills DESC
+LIMIT 10
 
