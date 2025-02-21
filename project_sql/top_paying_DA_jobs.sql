@@ -44,7 +44,6 @@ FROM
 INNER JOIN company_dim AS c ON j.company_id = c.company_id
 WHERE
    j.job_title_short IN ('Data Analyst') AND 
-   j.job_schedule_type = 'Full-time' AND 
    salary_year_avg IS NOT NULL AND
    j.job_work_from_home = TRUE
 ORDER BY
