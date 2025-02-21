@@ -21,7 +21,7 @@ GROUP BY
     s.skills
 ORDER BY 
     salary DESC
-LIMIT 25
+LIMIT 20
 
 
 -- top skills based on salary for remote Data analyst
@@ -40,4 +40,4 @@ GROUP BY
     s.skills
 ORDER BY 
     salary DESC
-LIMIT 25
+LIMIT 20
