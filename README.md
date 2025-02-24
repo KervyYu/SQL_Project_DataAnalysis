@@ -40,11 +40,11 @@ Personal Question: Is remote data analysis job suitable for me than non-remote?
 # Tools I Used
 These are the tools I personally used to tackle this project:
 
-   - SQL
-   - PostgreSQL
-   - Power BI
-   - Visual Studio Code
-   - Git and Github
+   - SQL - This is the backbone for the overall analysis of the project. My goal for using this is to learn and familiarize SQL queries and to be able to know how to use SQL for analysis.
+   - PostgreSQL - The database that I used to store the job posting dataset. 
+   - Power BI - The tool that I used for proper and eye-catching visualization to let the people see my insights clearly.
+   - Visual Studio Code - The IDE that I used to do my analysis. From creating tables, to querying and analyzing the dataset, it will be done in this IDE.
+   - Git and Github - For version control and sharing my analysis, ensuring collaboration and project tracking.
 
 # Analysis
 
