@@ -23,7 +23,7 @@ FROM
 INNER JOIN company_dim AS c ON j.company_id = c.company_id
 WHERE
    j.job_title_short IN ('Data Analyst') AND 
-   j.job_schedule_type = 'Full-time' AND 
+   j.job_schedule_type LIKE '%Full-time%' AND
    salary_year_avg IS NOT NULL
 ORDER BY
    salary DESC
@@ -44,11 +44,13 @@ FROM
 INNER JOIN company_dim AS c ON j.company_id = c.company_id
 WHERE
    j.job_title_short IN ('Data Analyst') AND 
+   j.job_schedule_type LIKE '%Full-time%' AND
    salary_year_avg IS NOT NULL AND
    j.job_work_from_home = TRUE
 ORDER BY
    salary DESC
 LIMIT 10
+
 
 -- highest paying Data Analyst job non-remote
 SELECT
@@ -64,10 +66,11 @@ FROM
 INNER JOIN company_dim AS c ON j.company_id = c.company_id
 WHERE
    j.job_title_short IN ('Data Analyst') AND 
-   j.job_schedule_type = 'Full-time' AND 
+   j.job_schedule_type LIKE '%Full-time%' AND 
    salary_year_avg IS NOT NULL AND
    j.job_work_from_home = FALSE
 ORDER BY
    salary DESC
 LIMIT 10
+
 

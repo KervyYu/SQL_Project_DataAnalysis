@@ -1,6 +1,6 @@
 /*
 Question:
-2. What are the top skills required for these top paying remote data analyst job??
+2. What are the top skills required for these top paying data analyst job??
 - Find the top 10 highest paying data analysis jobs for remote 
 - Add the specific skill required  
 - most common skills used for remote and non remote for top paying jobs

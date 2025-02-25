@@ -39,6 +39,7 @@ INNER JOIN skills_job_dim AS sj ON sj.skill_id = s.skill_id
 INNER JOIN job_postings_fact AS j ON sj.job_id = j.job_id
 WHERE
     j.job_title_short IN ('Data Analyst') AND
+    j.job_schedule_type = 'Full-time' AND 
     j.job_work_from_home = TRUE
 GROUP BY
     s.skills
@@ -58,6 +59,7 @@ INNER JOIN skills_job_dim AS sj ON sj.skill_id = s.skill_id
 INNER JOIN job_postings_fact AS j ON sj.job_id = j.job_id
 WHERE
     j.job_title_short IN ('Data Analyst') AND
+    j.job_schedule_type = 'Full-time' AND 
     j.job_work_from_home = FALSE
 GROUP BY
     s.skills
