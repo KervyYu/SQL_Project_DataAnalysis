@@ -50,7 +50,7 @@ These are the tools I personally used to tackle this project:
 For this analysis, I focused on finding the job market based on the Data Analyst job postings, specifically finding Data Analyst job posts that are offering Full-time jobs applications. I conducted two separate analyses: one for remote Data Analyst jobs and another for non-remote Data Analyst jobs to compare both findings. Here is how I approached each analysis questions:
 
 ## 1. What are the top paying Data Analyst Jobs?
-To identify the top-paying Data Analyst jobs, I filtered the records to include only those under Data Analyst job titles and separated them into remote and non-remote positions to compare salary differences. For the top job postings, I set a limit of 10 to display only the highest-paying Data Analyst jobs.
+To identify the top-paying Data Analyst jobs, I filtered the records to include only those under Data Analyst job titles and separated them into remote and non-remote positions to compare salary differences. For the top job postings, I set a limit of 10 and order the list in descending order to display only the highest-paying Data Analyst jobs.
 
 ### Top paying remote Data Analyst Jobs
 This query highlights the top paying jobs for remote Data Analyst job positions:
@@ -120,6 +120,102 @@ LIMIT 10
 
 
 ## 2. What are the top skills required for these top paying data analyst job?
+
+To identify the skills required for these top-paying Data Analyst jobs, I used the *INNER JOIN* function to combine the job postings with their respective skill requirements. Following the same process used to find the highest-paying jobs, I then included their skills and used the COUNT function to determine the most common skills required for each job.
+
+### Skills used by the top-paying Remote Data Analyst Jobs
+This query highlights the skills used by the top-paying remote data analyst job positions:
+
+```sql
+WITH top_salary_remote AS (
+    SELECT
+        j.job_id,
+        j.job_title AS job_name,
+        j.job_location,
+        j.job_work_from_home AS job_remote,
+        j.job_schedule_type,
+        j.salary_year_avg AS salary
+    FROM
+        job_postings_fact AS j
+    WHERE
+        j.job_title_short IN ('Data Analyst') AND 
+        j.job_schedule_type = 'Full-time' AND 
+        salary_year_avg IS NOT NULL AND
+        j.job_work_from_home = TRUE
+    ORDER BY
+        salary DESC
+    LIMIT 10
+)
+
+SELECT
+    s.skills AS skills,
+    COUNT(top_salary_remote.job_id) AS total_skills
+FROM
+    skills_dim AS s
+INNER JOIN skills_job_dim AS sj ON s.skill_id = sj.skill_id
+INNER JOIN top_salary_remote ON sj.job_id = top_salary_remote.job_id
+GROUP BY
+    s.skills
+ORDER BY
+    total_skills DESC
+LIMIT 10
+```
+### Skills used by the top-paying Non-Remote Data Analyst Jobs
+This query highlights the skills used by the top-paying non-remote data analyst job positions:
+
+```sql
+WITH top_salary_nonremote AS (
+    SELECT
+        j.job_id,
+        j.job_title AS job_name,
+        j.job_location,
+        j.job_work_from_home AS job_remote,
+        j.job_schedule_type,
+        j.salary_year_avg AS salary
+    FROM
+        job_postings_fact AS j
+    WHERE
+        j.job_title_short IN ('Data Analyst') AND 
+        j.job_schedule_type = 'Full-time' AND 
+        salary_year_avg IS NOT NULL AND
+        j.job_work_from_home = FALSE
+    ORDER BY
+        salary DESC
+    LIMIT 10
+)
+
+
+SELECT
+    s.skills AS skills,
+    COUNT(top_salary_nonremote.job_id) AS total_skills
+FROM
+    skills_dim AS s
+INNER JOIN skills_job_dim AS sj ON s.skill_id = sj.skill_id
+INNER JOIN top_salary_nonremote ON sj.job_id = top_salary_nonremote.job_id
+GROUP BY
+    s.skills
+ORDER BY
+    total_skills DESC
+LIMIT 10
+
+```
+
+### Bar chart visualization
+![Q2_topskillsremote](assets/Q2_Topskillsremote.png)
+*This bar graph visualizes the skills used by the top-paying remote Data Analyst job postions.*
+
+
+
+![Q2_topskillsnonremote](assets/Q2_Topskillsnonremote.png)
+*This bar graph visualizes the skills used by the top-paying non-remote Data Analyst job postions.*
+
+### Insights and Comparison:
+
+- **Similarities of skills** - Based on the bar chart,  both remote and non-remote Data Analyst jobs share the same top five most commonly used skills: *SQL*, *Python*, *Tableau*, *R*, and *Excel*. These 5 skills are mainly use as data analysis and data visualization.
+
+- **Wide variety of skills** - In addition to the top five commonly used skills for high-paying Data Analyst jobs, there are several other tools and technologies that these top paying jobs use. These include Snowflake, a data warehousing software; Atlassian and Jira, which are project management tools; Azure, a cloud computing platform; and SAS, GitHub, Kafka, and MATLAB, which serve various specialized functions in data analysis.
+
+## 3. What skills are in demand for data analyst job?
 
 
 
