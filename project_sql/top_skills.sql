@@ -58,7 +58,7 @@ WITH top_salary_remote AS (
         job_postings_fact AS j
     WHERE
         j.job_title_short IN ('Data Analyst') AND 
-        j.job_schedule_type = 'Full-time' AND 
+        j.job_schedule_type LIKE '%Full-time%' AND 
         salary_year_avg IS NOT NULL AND
         j.job_work_from_home = TRUE
     ORDER BY
@@ -94,7 +94,7 @@ WITH top_salary_nonremote AS (
         job_postings_fact AS j
     WHERE
         j.job_title_short IN ('Data Analyst') AND 
-        j.job_schedule_type = 'Full-time' AND 
+        j.job_schedule_type LIKE '%Full-time%' AND 
         salary_year_avg IS NOT NULL AND
         j.job_work_from_home = FALSE
     ORDER BY
