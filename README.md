@@ -314,8 +314,8 @@ ORDER BY
     salary DESC
 LIMIT 20
 ```
-### Skills used by the top-paying Non-Remote Data Analyst Jobs
-This query identifies the most in-demand skills for remote Data Analyst jobs:
+### Top skills based on average salary for Non-Remote Data Analyst Jobs
+This query identifies the top skills based on the average salary for non-remote data analyst jobs::
 
 ```sql
 SELECT
@@ -336,6 +336,19 @@ ORDER BY
     salary DESC
 LIMIT 20
 ```
+
+### Bar chart visualization
+![Q4_skillsSalaryRemote](assets/Q4_remoteSkillSalary.png)
+*This bar graph visualizes the skills used by the top-paying remote Data Analyst job postions.*
+
+
+
+![Q4_skillsSalaryNonRemote](assets/Q4_nonremoteSkillsSalary.png)
+*This bar graph visualizes the skills used by the top-paying non-remote Data Analyst job postions.*
+
+### Insights and Comparison:
+
+- **Higher Difficulty earns more** - 
 
 # Dashboard Visualization
 ## Remote Data Analyst Job Dashboard
