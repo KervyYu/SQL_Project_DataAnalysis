@@ -69,6 +69,7 @@ INNER JOIN job_postings_fact AS j ON sj.job_id = j.job_id
 WHERE
     j.job_title_short IN ('Data Analyst') AND
     j.salary_year_avg IS NOT NULL AND
+    j.job_schedule_type LIKE '%Full-time%' AND
     j.job_work_from_home = TRUE
 GROUP BY
     s.skills
@@ -94,6 +95,7 @@ INNER JOIN job_postings_fact AS j ON sj.job_id = j.job_id
 WHERE
     j.job_title_short IN ('Data Analyst') AND
     j.salary_year_avg IS NOT NULL AND
+    j.job_schedule_type LIKE '%Full-time%' AND
     j.job_work_from_home = FALSE
 GROUP BY
     s.skills

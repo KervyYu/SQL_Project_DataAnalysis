@@ -103,11 +103,13 @@ LIMIT 10
 
 ### Bar chart visualization
 ![Q1_remotechart](assets/Q1_remote.png)
+
 *This bar graph visualizes the top paying remote Data Analyst jobs that offers Full-time positions.*
 
 
 
 ![Q1_nonremotechart](assets/Q1_nonremote.png)
+
 *This bar graph visualizes the top paying non-remote Data Analyst jobs that offers Full-time positions.*
 
 ### Insights and Comparison:
@@ -202,11 +204,13 @@ LIMIT 10
 
 ### Bar chart visualization
 ![Q2_topskillsremote](assets/Q2_Topskillsremote.png)
+
 *This bar graph visualizes the skills used by the top-paying remote Data Analyst job postions.*
 
 
 
 ![Q2_topskillsnonremote](assets/Q2_Topskillsnonremote.png)
+
 *This bar graph visualizes the skills used by the top-paying non-remote Data Analyst job postions.*
 
 ### Insights and Comparison:
@@ -315,7 +319,7 @@ ORDER BY
 LIMIT 20
 ```
 ### Top skills based on average salary for Non-Remote Data Analyst Jobs
-This query identifies the top skills based on the average salary for non-remote data analyst jobs::
+This query identifies the top skills based on the average salary for non-remote data analyst jobs:
 
 ```sql
 SELECT
@@ -339,16 +343,58 @@ LIMIT 20
 
 ### Bar chart visualization
 ![Q4_skillsSalaryRemote](assets/Q4_remoteSkillSalary.png)
+
 *This bar graph visualizes the skills used by the top-paying remote Data Analyst job postions.*
 
 
 
 ![Q4_skillsSalaryNonRemote](assets/Q4_nonremoteSkillsSalary.png)
+
 *This bar graph visualizes the skills used by the top-paying non-remote Data Analyst job postions.*
 
 ### Insights and Comparison:
 
-- **Higher Difficulty earns more** - 
+- **Higher Difficulty earns more** - The bar graph shows that for both remote and non-remote Data Analyst jobs, skills with higher difficulty tend to have higher salaries.Programming languages like Solidity, frameworks like PySpark, version control systems like SVN, and database platforms like Couchbase have high average salaries. On the other hand, commonly used skills for entry-level data analysis, such as SQL and Excel, are not included in the chart due to their lower average salaries.
+
+ - **Diverse Skills to focus** - Skills with higher average salaries tend to focus on Big Data and Machine Learning. Technologies like PySpark, MXNet, and DataRobot are commonly used for solving Big Data and Machine Learning problems. On the other hand, for those interested in Cloud Infrastructure, skills like VMware, Elasticsearch, and Twilio are also associated with high average salaries. Similarly, for those focusing on Data Analysis, frameworks like dplyr (for R) and pandas (for Python) can also be associated with high average salaries.
+
+## 5. What are the most optimal skills to learn for both high salary and most used?
+
+For this question, I compared skills based on both their average salary and demand to determine which skills are the most optimal to learn and prioritize. Some skills are highly in demand but have lower salaries, while others are less commonly required but offer higher salaries.
+
+### Optimal Skills for Remote Data Analyst Jobs
+
+This query identifies the most optimal skills based on the demands and the average saalary for remote data analyst jobs:
+
+```sql
+
+
+
+```
+### Optimal Skill for Non-Remote Data Analyst Jobs
+This query identifies the most optimal skills based on the demands and the average saalary for non-remote data analyst jobs:
+
+```sql
+SELECT
+    s.skills,
+    ROUND(AVG(salary_year_avg), 0) AS salary
+FROM    
+    skills_dim AS s
+INNER JOIN skills_job_dim AS sj ON s.skill_id = sj.skill_id
+INNER JOIN job_postings_fact AS j ON sj.job_id = j.job_id
+WHERE
+    j.job_title_short IN ('Data Analyst') AND
+    j.job_schedule_type LIKE '%Full-time%' AND
+    j.salary_year_avg IS NOT NULL AND
+    j.job_work_from_home = FALSE
+GROUP BY
+    s.skills
+ORDER BY 
+    salary DESC
+LIMIT 20
+```
+
+
 
 # Dashboard Visualization
 ## Remote Data Analyst Job Dashboard
