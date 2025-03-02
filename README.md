@@ -360,14 +360,37 @@ LIMIT 20
 
 ## 5. What are the most optimal skills to learn for both high salary and most used?
 
-For this question, I compared skills based on both their average salary and demand to determine which skills are the most optimal to learn and prioritize. Some skills are highly in demand but have lower salaries, while others are less commonly required but offer higher salaries.
+For this question, I analyzed skills based on both their average salary and demand to determine the most optimal skills to learn and prioritize. Some skills are highly in demand but offer lower salaries, while others are less commonly required yet provide higher salaries.
+To illustrate this analysis, I will present both a table and a combo chart:
+
+- The table will display the top 25 skills based on demand and salary.
+- The combo chart will visualize the correlation between demand and salary, highlighting key trends.
 
 ### Optimal Skills for Remote Data Analyst Jobs
-
 This query identifies the most optimal skills based on the demands and the average saalary for remote data analyst jobs:
 
 ```sql
-
+SELECT
+    s.skills AS skills,
+    COUNT(sj.job_id) AS demand,
+    ROUND(AVG(j.salary_year_avg), 0) AS salary
+FROM 
+    skills_dim AS s
+INNER JOIN skills_job_dim AS sj ON s.skill_id = sj.skill_id
+INNER JOIN job_postings_fact AS j ON sj.job_id = j.job_id
+WHERE
+    j.job_title_short IN ('Data Analyst') AND
+    j.salary_year_avg IS NOT NULL AND
+    j.job_schedule_type LIKE '%Full-time%' AND
+    j.job_work_from_home = TRUE
+GROUP BY
+    s.skills
+HAVING
+    COUNT(j.job_id) > 10
+ORDER BY
+      salary DESC,
+      demand DESC
+LIMIT 25
 
 
 ```
@@ -376,31 +399,147 @@ This query identifies the most optimal skills based on the demands and the avera
 
 ```sql
 SELECT
-    s.skills,
-    ROUND(AVG(salary_year_avg), 0) AS salary
-FROM    
+    s.skills AS skills,
+    COUNT(sj.job_id) AS demand,
+    ROUND(AVG(j.salary_year_avg), 0) AS salary
+FROM 
     skills_dim AS s
 INNER JOIN skills_job_dim AS sj ON s.skill_id = sj.skill_id
 INNER JOIN job_postings_fact AS j ON sj.job_id = j.job_id
 WHERE
     j.job_title_short IN ('Data Analyst') AND
-    j.job_schedule_type LIKE '%Full-time%' AND
     j.salary_year_avg IS NOT NULL AND
+    j.job_schedule_type LIKE '%Full-time%' AND
     j.job_work_from_home = FALSE
 GROUP BY
     s.skills
-ORDER BY 
-    salary DESC
-LIMIT 20
+HAVING
+    COUNT(j.job_id) > 10
+ORDER BY
+      salary DESC,
+      demand DESC
+LIMIT 25
 ```
 
+### Table visualization
+
+| Skill       | Demand | Average Salary (USD) |
+|------------|--------|---------------------|
+| Hadoop     | 21     | 116,916             |
+| Go         | 25     | 114,917             |
+| Confluence | 11     | 114,210             |
+| BigQuery   | 12     | 113,375             |
+| Snowflake  | 37     | 112,948             |
+| AWS        | 29     | 111,954             |
+| Azure      | 32     | 109,427             |
+| Java       | 16     | 107,338             |
+| SSIS       | 11     | 106,382             |
+| Looker     | 48     | 105,229             |
+| Jira       | 20     | 104,918             |
+| Spark      | 12     | 104,417             |
+| Oracle     | 36     | 103,062             |
+| Redshift   | 15     | 102,466             |
+| Python     | 229    | 101,752             |
+| R          | 143    | 101,513             |
+| NoSQL      | 13     | 101,414             |
+| Qlik       | 13     | 99,631              |
+| Tableau    | 221    | 99,591              |
+| SAS        | 124    | 98,723              |
+| SSRS       | 13     | 98,338              |
+| Flow       | 26     | 97,850              |
+| SQL Server | 34     | 97,426              |
+| JavaScript | 19     | 97,328              |
+| SQL        | 381    | 97,272              |
+
+*This table shows the top 25 optimal skills to learn for remote Data Analyst job positions.*
+
+
+
+| Skill        | Demand | Average Salary (USD) |
+|-------------|--------|---------------------|
+| Kafka       | 40     | 129,999             |
+| PyTorch     | 20     | 125,226             |
+| Perl        | 20     | 124,686             |
+| TensorFlow  | 24     | 120,647             |
+| MongoDB     | 46     | 119,815             |
+| Airflow     | 65     | 116,546             |
+| Scala       | 52     | 115,563             |
+| Spark       | 167    | 115,174             |
+| Linux       | 54     | 114,726             |
+| Confluence  | 50     | 114,574             |
+| Splunk      | 15     | 112,928             |
+| Git         | 68     | 112,816             |
+| GCP         | 75     | 112,688             |
+| Snowflake   | 195    | 111,995             |
+| Plotly      | 21     | 111,908             |
+| Phoenix     | 19     | 111,792             |
+| Shell       | 41     | 111,738             |
+| Unix        | 34     | 111,428             |
+| Bash        | 11     | 111,097             |
+| Hadoop      | 115    | 110,740             |
+| PySpark     | 43     | 110,617             |
+| Databricks  | 88     | 110,473             |
+| Express     | 91     | 110,019             |
+| Redshift    | 71     | 109,915             |
+| PHP         | 28     | 109,553             |
+
+
+*This table shows the top 25 optimal skills to learn for non-remote Data Analyst job positions.*
+
+
+### Bar chart visualization
+![Q5_optimalSkillRemote](assets/Q5_OptimalSkills(Remote).png)
+
+*This bar graph visualizes the correlation between demands and salary of skills for remote Data Analyst job positions.*
+
+
+
+![Q5_optimalSkillNonRemote](assets/Q5_OptimalSkills(NonRemote).png)
+
+*This bar graph visualizes the correlation between demands and salary of skills for non-remote Data Analyst job positions.*
+
+
+### Insights and Comparison:
+- **Higher Demand, Lower Salary** - As shown in the combo chart for both remote and non-remote Data Analyst jobs, skills with high demand tend to have lower salaries, while less in-demand skills often offer higher average salaries. For remote jobs, demand and salary fluctuate—some skills rank high in both, while others remain low. In contrast, non-remote jobs show an increasing salary trend. However, both charts confirm that the highest-demand skills tend to have the lowest salaries.
+
+- **Skill Requirements** - In the table of the top 25 skills based on demand and salary, SQL has the highest demand for remote Data Analyst roles but also the lowest average salary, as it is a prerequisite for pursuing a Data Analyst career. However, for non-remote Data Analyst roles, skills related to Data Engineering and Data Warehousing are in higher demand than those primarily focused on Data Analysis.
+
+
+- **Most optimal skill to learn** - When determining which skill to learn and prioritize, both job market demand and average salary should be considered. A skill with high demand but low salary may not be ideal, just as a high-paying skill with low demand may not provide enough job opportunities. With this in mind, Python is the best skill to pursue for a remote Data Analyst role. As shown in the table, Python has at least 229 job postings, making it highly in demand. Additionally, it offers an average salary of over $100,000, making it a strong choice for learning. For non-remote Data Analyst roles, there are still many skills to explore. However, I have chosen to focus on MongoDB, as it is a crucial database tool that I need to learn.
 
 
 # Dashboard Visualization
+I created a dashboard visualization for both remote and non-remote Data Analyst job postings to provide an overall view of the Data Analyst job market in 2023. Additionally, this dashboard helps individuals considering non-remote roles by highlighting key trends and offering a clear visualization of the non-remote job landscape.
+
+For the dashboard, the metrics that is shown are the following:
+
+- Total Job Postings for remote non-remote Data Analyst Jobs
+- Total skills required for remote and non-remote Data Analyst Jobs(unique skills)
+- Job postings for the year 2023
+- Job title based on salary (top 10)
+- Total job post per country
+- Commonly used skills (Top 10)
+- Skills based on average salary (Top 10)
+
+
 ## Remote Data Analyst Job Dashboard
+![Remote Dashboard](assets/remoteDashboard.png)
+
+*This dashboard visualizes the overall Remote Data Analyst Job Postings for the year 2023*
 
 ## Non-Remote Data Analyst Job Dashboard
 
-# Learnings
+![Remote Dashboard](assets/nonremoteDashboard.png)
+
+*This dashboard visualizes the overall Non-Remote Data Analyst Job Postings for the year 2023*
 
 # Conclusion
+This analysis helped me determine which skills to prioritize for pursuing a career in Data Analysis. I was able to identify the essential skills needed to secure a great Data Analyst role. Additionally, it provided insights into the demand for Data Analysts in the job market, especially amid rising AI advancements and speculations that IT jobs may decline. However, this analysis confirms that Data Analyst roles remain in high demand this year.
+
+### Answers to my questions:
+
+
+
+
+# Learnings
+
