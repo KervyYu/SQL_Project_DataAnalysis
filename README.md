@@ -536,9 +536,13 @@ For the dashboard, the metrics that is shown are the following:
 # Conclusion
 This analysis helped me determine which skills to prioritize for pursuing a career in Data Analysis. I was able to identify the essential skills needed to secure a great Data Analyst role. Additionally, it provided insights into the demand for Data Analysts in the job market, especially amid rising AI advancements and speculations that IT jobs may decline. However, this analysis confirms that Data Analyst roles remain in high demand this year.
 
-### Answers to my questions:
-
-
+### Overall Insights:
+1. **Top paying Data Analyst jobs** - For remote work, they offer a wide salary range, with the highest being a Data Analyst position at $650,000. For non-remote work, the highest-paying position is a Database Administrator, with a salary of $400,000.
+2. **Skills for the top paying jobs** - Both remote and non-remote jobs share similar top-paying skills, including SQL, Python, Excel, Tableau, and R. These are the most commonly used skills for high-paying Data Analyst roles in both work settings.
+3. **In-demand skills** - SQL is the most in-demand skill for both remote and non-remote Data Analyst jobs, making it an essential skill to learn for pursuing a Data Analyst role.
+4. **Highest paying skill** - For remote work, a version control system like SVN has the highest-paying skill to learn, with an average salary of $400,000. For non-remote work, PySpark has the highest average salary, at $208,000, considering that this skill is primarily used for working with big datasets or Data Engineering tasks.
+5. **Most optimal skill** - For remote work, SQL is the most optimal skill, with up to 381 job postings requiring it, making it highly in demand, and offering an average salary of up to $100,000. On the other hand, non-remote roles focus more on the Data Engineering field, where the Snowflake platform has the highest demand, with 195 job postings and an average salary of at least $111,000.
+6. **Remote or Non-Remote** - 
 
 
 # Learnings
